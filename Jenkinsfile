@@ -33,10 +33,11 @@ options {
                 /*docker.withRegistry('', 'docker_creds') {
                     docker.build('lwplapbs/springboot').push('latest')
                 } */
-                DOCKER_TAG="lwplapbs/bootdocker" + ":{BUILD_NUMBER}"
+                //DOCKER_TAG="lwplapbs/bootdocker" + ":{BUILD_NUMBER}"
                 // app = docker.build("DOCKER_TAG")
                 // app.push()
-                docker image build -t $DOCKER_TAG .
+                ls -ltr
+                docker image build -t lwplapbs/springboot:latest  .
                 docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PSW
                 docker push $DOCKER_TAG
             }    
