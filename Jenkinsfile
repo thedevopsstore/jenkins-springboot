@@ -26,7 +26,7 @@ options {
                 sh 'chmod +x gradlew'
                 sh './gradlew build'
                 sh 'docker image build'
-                stash 'source'
+                //stash 'source'
             }
         }
         stage('build image'){
