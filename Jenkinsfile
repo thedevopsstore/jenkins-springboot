@@ -49,7 +49,6 @@ options {
                 docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PSW
                 docker push $DOCKER_TAG
             }    
-            }
         }
     }
 
