@@ -51,7 +51,7 @@ stage ('Deploy') {
         sshagent(credentials : ['docker-ssh']) {
             sh 'ssh -o StrictHostKeyChecking=no azureuser@20.125.120.113 uptime'
             sh 'ssh -v azureuser@20.125.120.113'
-            sh 'docker container run -d --name springboot1 lwplapbs/springboot:latest'
+            sh 'sudo docker container run -d --name springboot1 lwplapbs/springboot:latest'
         }
     }
 }
