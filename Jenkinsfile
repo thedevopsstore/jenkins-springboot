@@ -29,9 +29,21 @@ options {
                 stash 'source'
             }
         }
-        stage('build image'){
+        /* stage('build image'){
             steps{ script {
-                // DOCKER_TAG="lwplapbs/bootdocker" + ":{BUILD_NUMBER}"
+                DOCKER_TAG="lwplapbs/bootdocker" + ":{BUILD_NUMBER}"
+                app = docker.build("DOCKER_TAG")
+                docker image build -t $DOCKER_TAG .
+                docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PSW
+                docker push $DOCKER_TAG
+            }    
+            }
+        }
+    } */
+        stage('build image'){
+            agent {label 'worker'}
+            steps {
+                DOCKER_TAG="lwplapbs/bootdocker" + ":{BUILD_NUMBER}"
                 // app = docker.build("DOCKER_TAG")
                 docker image build -t $DOCKER_TAG .
                 docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PSW
