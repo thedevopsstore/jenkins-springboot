@@ -43,11 +43,11 @@ options {
         stage('build image'){
             agent {label 'worker'}
             steps {
-                DOCKER_TAG="lwplapbs/bootdocker" + ":{BUILD_NUMBER}"
+                sh 'DOCKER_TAG="lwplapbs/bootdocker" + ":{BUILD_NUMBER}"'
                 // app = docker.build("DOCKER_TAG")
-                docker image build -t $DOCKER_TAG .
-                docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PSW
-                docker push $DOCKER_TAG
+                sh 'docker image build -t $DOCKER_TAG .'
+                sh 'docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PSW'
+                sh 'docker push $DOCKER_TAG'
             }    
         }
     }
