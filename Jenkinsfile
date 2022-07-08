@@ -25,6 +25,7 @@ options {
                 checkout scm
                 sh 'chmod +x gradlew'
                 sh './gradlew build'
+                sh 'ls -ltr build/libs/'
                 stash 'source'
             }
         }
@@ -36,8 +37,9 @@ options {
                 //DOCKER_TAG="lwplapbs/bootdocker" + ":{BUILD_NUMBER}"
                 // app = docker.build("DOCKER_TAG")
                 // app.push()
+                unstash 'source'
                 sh '''
-                ls -ltr
+                ls -ltr build/libs/
                 docker image build -t lwplapbs/springboot:latest  .
                 docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PSW
                 docker push lwplapbs/springboot:latest
